@@ -10,26 +10,17 @@ var calculatorObject = {
     currentTotal: 0,
     selectedNumber: "none",
     currentOperation: "none",
-    add: function() {
+    operate: function() {
         if (this.selectedNumber != "none" & this.currentOperation == "add") {
             this.currentTotal += this.selectedNumber;
-        }
-    },
-    subtract: function() {
-        if (this.selectedNumber != "none" & this.currentOperation == "subtract") {
+        } else if (this.selectedNumber != "none" & this.currentOperation == "subtract") {
             this.currentTotal -= this.selectedNumber;
-        }
-    },
-    multiply: function() {
-        if (this.selectedNumber != "none" & this.currentOperation == "multiply") {
+        } else if (this.selectedNumber != "none" & this.currentOperation == "multiply") {
             this.currentTotal *= this.selectedNumber;
-        }
-    },
-    divide: function() {
-        if (this.selectedNumber != "none" & this.currentOperation == "divide") {
+        } else if (this.selectedNumber != "none" & this.currentOperation == "divide") {
             this.currentTotal /= this.selectedNumber;
         }
-    }
+    },
 };
 
 const calculator = Object.create(calculatorObject);
