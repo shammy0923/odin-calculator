@@ -1,7 +1,38 @@
 // DOM Variables
-const calculator = document.querySelector(".calculator");
+const calculatorElement = document.querySelector(".calculator");
 const calculatorDisplay = document.querySelector(".calculator-display");
 const calculatorKeys = document.querySelector(".calculator-keys");
+
+
+// Calculator Object
+
+var calculatorObject = {
+    currentTotal: 0,
+    selectedNumber: "none",
+    currentOperation: "none",
+    add: function() {
+        if (this.selectedNumber != "none" & this.currentOperation == "add") {
+            this.currentTotal += this.selectedNumber;
+        }
+    },
+    subtract: function() {
+        if (this.selectedNumber != "none" & this.currentOperation == "subtract") {
+            this.currentTotal -= this.selectedNumber;
+        }
+    },
+    multiply: function() {
+        if (this.selectedNumber != "none" & this.currentOperation == "multiply") {
+            this.currentTotal *= this.selectedNumber;
+        }
+    },
+    divide: function() {
+        if (this.selectedNumber != "none" & this.currentOperation == "divide") {
+            this.currentTotal /= this.selectedNumber;
+        }
+    }
+};
+
+const calculator = Object.create(calculatorObject);
 
 // Adding click listener to ALL keys
 calculatorKeys.addEventListener("click", e => {
@@ -15,7 +46,7 @@ calculatorKeys.addEventListener("click", e => {
         // Checking if Operator Key
         if (action == "add" || action == "subtract" ||
             action == "divide" || action == "multiply") {
-            alert("Operator Key!");
+            calculator.currentOperation = action;
         }
 
         // Checking if Decimal Key
@@ -32,7 +63,5 @@ calculatorKeys.addEventListener("click", e => {
         if (action == "calculate") {
             alert("Calculate Key!");
         }
-
     }
-
 });
