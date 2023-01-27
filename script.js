@@ -20,7 +20,14 @@ var calculatorObject = {
         } else if (this.selectedNumber != "none" & this.currentOperation == "divide") {
             this.currentTotal /= this.selectedNumber;
         }
+        calculatorDisplay.textContent = this.currentTotal;
     },
+    clear: function() {
+        this.currentOperation = "none";
+        this.selectedNumber = "none";
+        this.currentTotal = 0;
+        calculatorDisplay.textContent = 0;
+    }
 };
 
 const calculator = Object.create(calculatorObject);
@@ -47,12 +54,22 @@ calculatorKeys.addEventListener("click", e => {
 
         // Checking if Clear Key
         if (action == "clear") {
-            alert("Clear Key!");
+            calculator.clear();
         }
 
         // Checking if Calculate Key
         if (action == "calculate") {
-            alert("Calculate Key!");
+            calculator.operate();
+        }
+
+        // Checking if Number Key 
+        if (action == "number") {
+            if (calculator.selectedNumber == "none") {
+                calculator.selectedNumber = key.textContent;
+            } else {
+                calculator.selectedNumber += key.textContent;
+            }
+            calculatorDisplay.textContent = calculator.selectedNumber;
         }
     }
 });
