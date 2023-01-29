@@ -13,6 +13,7 @@ var calculatorObject = {
     previousNumber: "none",
     selectedNumber: "none",
     currentOperation: "none",
+    newNumber: false,
     selectOperand: function(action) {
         if (this.selectedNumber != "none") {
             switch (action) {
@@ -50,6 +51,7 @@ var calculatorObject = {
         this.selectedNumber = "none";
         this.currentTotal = 0;
         this.previousNumber = 0;
+        this.newNumber = false;
         prevDisplay.textContent = "";
         currentDisplay.textContent = 0;
     }
@@ -93,6 +95,10 @@ calculatorKeys.addEventListener("click", e => {
             if (calculator.selectedNumber == "none") {
                 calculator.selectedNumber = key.textContent;
             } else {
+                if (calculator.previousNumber != "none" && calculator.newNumber == false) {
+                    calculator.selectedNumber = "";
+                    calculator.newNumber = true;
+                }
                 calculator.selectedNumber += key.textContent;
             }
             currentDisplay.textContent = calculator.selectedNumber;
