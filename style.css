@@ -27,6 +27,8 @@ body {
 }
 
 .calculator-display {
+    display: flex;
+    flex-direction: column;
     background-color: #222222;
     color: white;
     width: 25%;
@@ -34,6 +36,13 @@ body {
     text-align: right;
     font-size: 5em;
 }
+
+.previous-display {
+    color: rgb(230, 223, 223);
+    font-size: .5em;
+}
+
+.current-display {}
 
 .calculator-keys {
     width: 25%;

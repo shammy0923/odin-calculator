@@ -1,5 +1,7 @@
 // DOM Variables
 const calculatorElement = document.querySelector(".calculator");
+const currentDisplay = document.querySelector(".current-display");
+const prevDisplay = document.querySelector(".previous-display");
 const calculatorDisplay = document.querySelector(".calculator-display");
 const calculatorKeys = document.querySelector(".calculator-keys");
 
@@ -10,6 +12,25 @@ var calculatorObject = {
     currentTotal: 0,
     selectedNumber: "none",
     currentOperation: "none",
+    selectOperand: function(action) {
+        if (this.selectedNumber != "none") {
+            switch (action) {
+                case "add":
+                    prevDisplay.textContent = this.selectedNumber + " + ";
+                    break;
+                case "subtract":
+                    prevDisplay.textContent = this.selectedNumber + " - ";
+                    break;
+                case "multiply":
+                    prevDisplay.textContent = this.selectedNumber + " * ";
+                    break;
+                case "divide":
+                    prevDisplay.textContent = this.selectedNumber + " / ";
+                    break;
+            }
+            currentDisplay.textContent = 0
+        }
+    },
     operate: function() {
         if (this.selectedNumber != "none" & this.currentOperation == "add") {
             this.currentTotal += this.selectedNumber;
@@ -20,13 +41,13 @@ var calculatorObject = {
         } else if (this.selectedNumber != "none" & this.currentOperation == "divide") {
             this.currentTotal /= this.selectedNumber;
         }
-        calculatorDisplay.textContent = this.currentTotal;
+        currentDisplay.textContent = this.currentTotal;
     },
     clear: function() {
         this.currentOperation = "none";
         this.selectedNumber = "none";
         this.currentTotal = 0;
-        calculatorDisplay.textContent = 0;
+        currentDisplay.textContent = 0;
     }
 };
 
@@ -45,6 +66,7 @@ calculatorKeys.addEventListener("click", e => {
         if (action == "add" || action == "subtract" ||
             action == "divide" || action == "multiply") {
             calculator.currentOperation = action;
+            calculator.selectOperand(action);
         }
 
         // Checking if Decimal Key
@@ -69,7 +91,7 @@ calculatorKeys.addEventListener("click", e => {
             } else {
                 calculator.selectedNumber += key.textContent;
             }
-            calculatorDisplay.textContent = calculator.selectedNumber;
+            currentDisplay.textContent = calculator.selectedNumber;
         }
     }
 });
