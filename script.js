@@ -10,6 +10,7 @@ const calculatorKeys = document.querySelector(".calculator-keys");
 
 var calculatorObject = {
     currentTotal: 0,
+    previousNumber: "none",
     selectedNumber: "none",
     currentOperation: "none",
     selectOperand: function(action) {
@@ -28,6 +29,7 @@ var calculatorObject = {
                     prevDisplay.textContent = this.selectedNumber + " / ";
                     break;
             }
+            this.previousNumber = this.selectedNumber
             currentDisplay.textContent = 0
         }
     },
@@ -47,6 +49,8 @@ var calculatorObject = {
         this.currentOperation = "none";
         this.selectedNumber = "none";
         this.currentTotal = 0;
+        this.previousNumber = 0;
+        prevDisplay.textContent = "";
         currentDisplay.textContent = 0;
     }
 };
