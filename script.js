@@ -35,16 +35,22 @@ var calculatorObject = {
         }
     },
     operate: function() {
-        if (this.selectedNumber != "none" & this.currentOperation == "add") {
-            this.currentTotal += this.selectedNumber;
-        } else if (this.selectedNumber != "none" & this.currentOperation == "subtract") {
-            this.currentTotal -= this.selectedNumber;
-        } else if (this.selectedNumber != "none" & this.currentOperation == "multiply") {
-            this.currentTotal *= this.selectedNumber;
-        } else if (this.selectedNumber != "none" & this.currentOperation == "divide") {
-            this.currentTotal /= this.selectedNumber;
+        if (this.selectedNumber != "none" & this.previousNumber != "none") {
+            if (this.selectedNumber != "none" & this.currentOperation == "add") {
+                this.currentTotal = parseInt(this.currentTotal) + parseInt(this.selectedNumber);
+            } else if (this.selectedNumber != "none" & this.currentOperation == "subtract") {
+                this.currentTotal = parseInt(this.currentTotal) - parseInt(this.selectedNumber);
+            } else if (this.selectedNumber != "none" & this.currentOperation == "multiply") {
+                this.currentTotal = parseInt(this.currentTotal) * parseInt(this.selectedNumber);
+            } else if (this.selectedNumber != "none" & this.currentOperation == "divide") {
+                this.currentTotal = parseInt(this.currentTotal) / parseInt(this.selectedNumber);
+            }
+            prevDisplay.textContent += this.selectedNumber;
+            currentDisplay.textContent = this.currentTotal;
+            this.newNumber = false;
+            this.previousNumber = "none"
+            this.selectedNumber = this.currentTotal;
         }
-        currentDisplay.textContent = this.currentTotal;
     },
     clear: function() {
         this.currentOperation = "none";
@@ -98,6 +104,7 @@ calculatorKeys.addEventListener("click", e => {
                 if (calculator.previousNumber != "none" && calculator.newNumber == false) {
                     calculator.selectedNumber = "";
                     calculator.newNumber = true;
+                    calculator.currentTotal = calculator.previousNumber;
                 }
                 calculator.selectedNumber += key.textContent;
             }
